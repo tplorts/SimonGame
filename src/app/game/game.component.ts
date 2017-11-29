@@ -15,10 +15,12 @@ const log = new Logger('Game');
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
-  simons: Simon[]
 
   constructor(private gameConfig: GameConfigService) {
-    this.simons = gameConfig.simons
+  }
+
+  public get simons() : Simon[] {
+    return this.gameConfig.simons
   }
 
   ngOnInit() {
