@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Logger } from '../core/logger.service';
 
+import { GameConfigService } from './game-config.service';
 import Simon from './simon'
 
 
@@ -16,9 +17,8 @@ const log = new Logger('Game');
 export class GameComponent implements OnInit {
   simons: Simon[]
 
-  constructor() {
-    const SimonColors = ['red', 'green', 'yellow', 'blue']
-    this.simons = SimonColors.map(color => new Simon(color))
+  constructor(private gameConfig: GameConfigService) {
+    this.simons = gameConfig.colors.map(color => new Simon(color))
   }
 
   ngOnInit() {

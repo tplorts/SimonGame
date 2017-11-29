@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
 
 import { GameComponent } from './game.component';
+import { GameConfigService } from './game-config.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { GameComponent } from './game.component';
   ],
   exports: [
     GameComponent,
-  ]
+  ],
+  providers: [GameConfigService]
 })
 export class GameModule { }

@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/shared.module';
+import { GameModule } from '../game/game.module';
 import { HomeComponent } from './home.component';
 
 describe('HomeComponent', () => {
@@ -18,7 +19,8 @@ describe('HomeComponent', () => {
           BrowserAnimationsModule,
           FlexLayoutModule,
           MaterialModule,
-          SharedModule
+          SharedModule,
+          GameModule,
         ],
         declarations: [HomeComponent],
         providers: [
