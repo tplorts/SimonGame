@@ -7,7 +7,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './home.component';
-import { QuoteService } from './quote.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -23,7 +22,6 @@ describe('HomeComponent', () => {
         ],
         declarations: [HomeComponent],
         providers: [
-          QuoteService,
           MockBackend,
           BaseRequestOptions,
           {
