@@ -26,7 +26,7 @@ import { AboutModule } from './about/about.module';
     SharedModule,
     HomeModule,
     AboutModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   declarations: [AppComponent],
   providers: [
