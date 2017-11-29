@@ -1,0 +1,18 @@
+{
+  "generator-ngx-rocket": {
+    "version": "3.0.0",
+    "props": {
+      "appName": "Simon Game",
+      "target": [
+        "web"
+      ],
+      "pwa": true,
+      "ui": "material",
+      "layout": "side-menu",
+      "auth": false,
+      "projectName": "simon-game",
+      "packageManager": "npm",
+      "mobile": []
+    }
+  }
+}
