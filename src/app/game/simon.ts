@@ -7,7 +7,15 @@ export default class Simon {
     return { backgroundColor: this.color }
   }
 
-  toString (): string {
+  toString () : string {
     return `Simon ${this.color}`
+  }
+
+  equals (other: Simon) : boolean {
+    return this.color === other.color
+  }
+
+  clone () : Simon {
+    return new Simon(this.color)
   }
 }

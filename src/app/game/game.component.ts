@@ -18,7 +18,7 @@ export class GameComponent implements OnInit {
   simons: Simon[]
 
   constructor(private gameConfig: GameConfigService) {
-    this.simons = gameConfig.colors.map(color => new Simon(color))
+    this.simons = gameConfig.simons
   }
 
   ngOnInit() {
