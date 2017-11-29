@@ -1,3 +1,5 @@
-<p>
-  game works!
-</p>
+<button mat-fab 
+  *ngFor="let simon of simons"
+  [ngStyle]="simon.style()"
+  (click)="clickedSimon(simon)"
+></button>
