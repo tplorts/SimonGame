@@ -4,8 +4,13 @@ import { GameComponent } from './game.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
-  declarations: [GameComponent]
+  declarations: [
+    GameComponent,
+  ],
+  exports: [
+    GameComponent,
+  ]
 })
 export class GameModule { }

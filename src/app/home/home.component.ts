@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   isLoading: boolean;
 
   ngOnInit() {
-    this.isLoading = true;
+    this.isLoading = false;
   }
 
 }
