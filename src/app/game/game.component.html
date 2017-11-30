@@ -1,5 +1,14 @@
-<button mat-fab 
-  *ngFor="let simon of simons"
-  [ngStyle]="simon.style()"
-  (click)="clickedSimon(simon)"
-></button>
+<div>
+  <button
+    (click)="beginGame()"
+  >Begin</button>
+</div>
+
+<div class="game-buttons">
+  <button mat-fab simon-button
+    *ngFor="let simon of simons"
+    [ngClass]="{ 'flashing': simon.equals(flashingSimon) }"
+    [ngStyle]="simon.style()"
+    (click)="clickedSimon(simon)"
+  ></button>
+</div>

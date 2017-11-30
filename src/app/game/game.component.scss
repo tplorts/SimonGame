@@ -1,3 +1,13 @@
-button {
+.game-buttons {
+  background-color: black;
+  padding: 2em;
+}
+
+[simon-button] {
   margin: 1em;
+  transition: all .3s;
+  &.flashing {
+    box-shadow: 0 0 10px 5px lightgrey;
+  }
+  border: 1px grey;
 }

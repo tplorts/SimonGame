@@ -20,8 +20,10 @@ export class GameEngineService {
     this._sequence = []
   }
 
-  addToSequence () {
-    this._sequence.push(this.randomSimon())
+  addToSequence () : Simon {
+    const nextSimon = this.randomSimon()
+    this._sequence.push(nextSimon)
+    return nextSimon
   }
 
   randomSimon () : Simon {
