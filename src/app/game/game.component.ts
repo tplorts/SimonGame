@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Logger } from '../core/logger.service';
 import Tone from 'tone'
 
+import { Logger } from '../core/logger.service';
 import { GameConfigService } from './game-config.service';
 import { GameEngineService } from './game-engine.service';
 import Simon from './simon'
 
 
 const log = new Logger('Game');
-const NoOp = () => {}
 
 
 @Component({
@@ -19,8 +18,11 @@ const NoOp = () => {}
 export class GameComponent implements OnInit {
   flashingSimon: Simon
   synth: any
-  resolveUserSelection: Function
   isGameRunning: boolean
+
+  timeBetweenRuns: number
+  flashTime: number
+  timeBetweenFlashes: number
 
   constructor(
     private gameConfig: GameConfigService,
@@ -28,8 +30,11 @@ export class GameComponent implements OnInit {
   ) {
     this.flashingSimon = null;
     this.synth = new Tone.Synth().toMaster();
-    this.resolveUserSelection = null
     this.isGameRunning = false
+
+    this.timeBetweenRuns = 500
+    this.flashTime = 400
+    this.timeBetweenFlashes = 300
   }
 
   public get simons() : Simon[] {
@@ -41,34 +46,22 @@ export class GameComponent implements OnInit {
 
   async beginGame () {
     this.isGameRunning = true
-    let madeMistake = false
-    while (!madeMistake) {
-      this.gameEngine.addToSequence()
-      await this.flashSequence()
-      try {
-        await this.checkSequence()
-        log.debug('Correct.  Moving on.')
-        await this.timerPromise(400)
-      } catch (err) {
-        log.debug('Incorrect.  Round over.')
-        madeMistake = true
-      }
-    }
-    log.debug('Game round ends.')
+    await this.startNextRun()
+  }
+
+  endGame () {
+    log.debug('Game round ended.')
     this.gameEngine.resetGame()
     this.isGameRunning = false
   }
 
-  async checkSequence () {
-    for (const correctSimon of this.gameEngine.sequence) {
-      const selectedSimon: Simon = await this.userSelection()
-      if (!selectedSimon.equals(correctSimon)) {
-        throw new Error('incorrect simon selection')
-      }
-    }
+  async startNextRun() {
+    this.gameEngine.startNextRun()
+    await this.timerPromise(this.timeBetweenRuns)
+    await this.playSequence()
   }
 
-  async flashSequence () {
+  async playSequence () {
     for (const simon of this.gameEngine.sequence) {
       this.playTone(simon);
       await this.flashSimon(simon)
@@ -81,9 +74,9 @@ export class GameComponent implements OnInit {
 
   async flashSimon (simon: Simon) {
     this.flashingSimon = simon
-    await this.timerPromise(600)
+    await this.timerPromise(this.flashTime)
     this.flashingSimon = null
-    await this.timerPromise(600)
+    await this.timerPromise(this.timeBetweenFlashes)
   }
 
   timerPromise (ms: number) {
@@ -92,14 +85,18 @@ export class GameComponent implements OnInit {
 
   clickedSimon (simon: Simon) {
     log.debug('clicked', simon.toString());
-    const resolveUserSelection = this.resolveUserSelection || NoOp
-    this.resolveUserSelection = null
-    resolveUserSelection(simon)
-  }
-
-  userSelection () : Promise<Simon> {
-    return new Promise((resolve, reject) => {
-      this.resolveUserSelection = resolve
-    })
+    if (this.isGameRunning) {
+      if (this.gameEngine.nextSimon.equals(simon)) {
+        if (this.gameEngine.isSequenceComplete()) {
+          log.debug('finished run')
+          this.startNextRun()
+        } else {
+          log.debug('correct')
+        }
+      } else {
+        log.debug('wrong')
+        this.endGame()
+      }
+    }
   }
 }
