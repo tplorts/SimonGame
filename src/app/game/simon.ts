@@ -3,34 +3,34 @@ const toneMap = {
   red: 'D4',
   yellow: 'E4',
   blue: 'F4',
-};
+}
 
 export default class Simon {
-  private _tone: string;
+  private _tone: string
 
   constructor (
-    private _color: string
+    private _color: string,
   ) {
     this._tone = toneMap[_color]
   }
 
-  public get tone() : string {
+  public get tone (): string {
     return this._tone
   }
 
-  style () {
+  public style () {
     return { backgroundColor: this._color }
   }
 
-  toString () : string {
+  public toString (): string {
     return `Simon ${this._color}`
   }
 
-  equals (other: Simon) : boolean {
+  public equals (other: Simon): boolean {
     return !!other && this._color === other._color
   }
 
-  clone () : Simon {
+  public clone (): Simon {
     return new Simon(this._color)
   }
 }
