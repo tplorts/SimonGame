@@ -43,12 +43,12 @@ export class GameComponent implements OnInit {
 
   async beginGame () {
     this.isGameRunning = true
+    this.gameEngine.resetGame()
     await this.startNextRun()
   }
 
   endGame () {
     log.debug('Game round ended.')
-    this.gameEngine.resetGame()
     this.isGameRunning = false
   }
 
