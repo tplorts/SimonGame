@@ -46,13 +46,6 @@
         ]
       }
     ],
-    "trailing-comma": [
-      true,
-      {
-        "multiline": "always",
-        "esSpecCompliant": true
-      }
-    ],
     "no-arg": true,
     "no-bitwise": true,
     "no-console": [
@@ -152,6 +145,19 @@
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
-    "directive-class-suffix": true
+    "directive-class-suffix": true,
+
+
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "always",
+        "esSpecCompliant": true
+      }
+    ],
+    "no-consecutive-blank-lines": [true, 3],
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "ordered-imports": false
+
   }
 }
