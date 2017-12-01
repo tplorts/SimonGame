@@ -1,15 +1,18 @@
-<div>
-  <button
-    (click)="beginGame()"
-    [disabled]="isGameRunning"
-  >Begin</button>
-</div>
+<mat-card class="game-container">
 
-<div class="game-buttons">
-  <button mat-fab simon-button
-    *ngFor="let simon of simons"
-    [ngClass]="{ 'flashing': simon.equals(flashingSimon) }"
-    [ngStyle]="simon.style()"
-    (click)="clickedSimon(simon)"
-  ></button>
-</div>
+  <div>
+    <button mat-raised-button
+      color="primary"
+      (click)="beginGame()"
+      [disabled]="isGameRunning">Begin</button>
+  </div>
+
+  <div class="game-buttons">
+    <button mat-fab simon-button
+      *ngFor="let simon of simons"
+      [ngClass]="{ 'flashing': simon.equals(flashingSimon) }"
+      [ngStyle]="simon.style()"
+      (click)="clickedSimon(simon)"></button>
+  </div>
+
+</mat-card>
