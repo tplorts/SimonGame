@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core'
-import Tone from 'tone'
 
 import { Logger } from '../core/logger.service'
 import { GameConfigService } from './game-config.service'
 import { GameEngineService } from './game-engine.service'
+import { ToneService } from './tone.service'
 import Simon from './simon'
 
 
@@ -17,9 +17,7 @@ const log = new Logger('Game')
 })
 export class GameComponent implements OnInit {
   flashingSimon: Simon
-  synth: any
   isGameRunning: boolean
-
   timeBetweenRuns: number
   flashTime: number
   timeBetweenFlashes: number
@@ -27,11 +25,10 @@ export class GameComponent implements OnInit {
   constructor (
     private gameConfig: GameConfigService,
     private gameEngine: GameEngineService,
+    private tone: ToneService,
   ) {
     this.flashingSimon = null
-    this.synth = new Tone.Synth().toMaster()
     this.isGameRunning = false
-
     this.timeBetweenRuns = 500
     this.flashTime = 400
     this.timeBetweenFlashes = 300
@@ -69,7 +66,7 @@ export class GameComponent implements OnInit {
   }
 
   async playTone (simon: Simon) {
-    this.synth.triggerAttackRelease(simon.tone, '8n')
+    this.tone.synth.triggerAttackRelease(simon.tone, '8n')
   }
 
   async flashSimon (simon: Simon) {

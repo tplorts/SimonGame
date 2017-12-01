@@ -6,6 +6,7 @@ import { MaterialModule } from '../material.module'
 import { GameComponent } from './game.component'
 import { GameConfigService } from './game-config.service'
 import { GameEngineService } from './game-engine.service'
+import { ToneService } from './tone.service'
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { GameEngineService } from './game-engine.service'
   providers: [
     GameConfigService,
     GameEngineService,
+    ToneService,
   ],
 })
 export class GameModule { }
