@@ -1,21 +1,21 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { FlexLayoutModule } from '@angular/flex-layout'
 
-import { MaterialModule } from '../material.module';
-import { LoaderComponent } from './loader/loader.component';
+import { MaterialModule } from '../material.module'
+import { LoaderComponent } from './loader/loader.component'
 
 @NgModule({
   imports: [
     FlexLayoutModule,
     MaterialModule,
-    CommonModule
+    CommonModule,
   ],
   declarations: [
-    LoaderComponent
+    LoaderComponent,
   ],
   exports: [
-    LoaderComponent
-  ]
+    LoaderComponent,
+  ],
 })
 export class SharedModule { }

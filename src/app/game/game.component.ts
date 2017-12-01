@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core'
 import Tone from 'tone'
 
-import { Logger } from '../core/logger.service';
-import { GameConfigService } from './game-config.service';
-import { GameEngineService } from './game-engine.service';
+import { Logger } from '../core/logger.service'
+import { GameConfigService } from './game-config.service'
+import { GameEngineService } from './game-engine.service'
 import Simon from './simon'
 
 
-const log = new Logger('Game');
+const log = new Logger('Game')
 
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+  styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
   flashingSimon: Simon
@@ -24,12 +24,12 @@ export class GameComponent implements OnInit {
   flashTime: number
   timeBetweenFlashes: number
 
-  constructor(
+  constructor (
     private gameConfig: GameConfigService,
-    private gameEngine: GameEngineService
+    private gameEngine: GameEngineService,
   ) {
-    this.flashingSimon = null;
-    this.synth = new Tone.Synth().toMaster();
+    this.flashingSimon = null
+    this.synth = new Tone.Synth().toMaster()
     this.isGameRunning = false
 
     this.timeBetweenRuns = 500
@@ -37,11 +37,11 @@ export class GameComponent implements OnInit {
     this.timeBetweenFlashes = 300
   }
 
-  public get simons() : Simon[] {
+  public get simons (): Simon[] {
     return this.gameConfig.simons
   }
 
-  ngOnInit() {
+  ngOnInit () {
   }
 
   async beginGame () {
@@ -55,7 +55,7 @@ export class GameComponent implements OnInit {
     this.isGameRunning = false
   }
 
-  async startNextRun() {
+  async startNextRun () {
     this.gameEngine.startNextRun()
     await this.timerPromise(this.timeBetweenRuns)
     await this.playSequence()
@@ -63,13 +63,13 @@ export class GameComponent implements OnInit {
 
   async playSequence () {
     for (const simon of this.gameEngine.sequence) {
-      this.playTone(simon);
+      this.playTone(simon)
       await this.flashSimon(simon)
     }
   }
 
   async playTone (simon: Simon) {
-    this.synth.triggerAttackRelease(simon.tone, '8n');
+    this.synth.triggerAttackRelease(simon.tone, '8n')
   }
 
   async flashSimon (simon: Simon) {
@@ -84,7 +84,7 @@ export class GameComponent implements OnInit {
   }
 
   clickedSimon (simon: Simon) {
-    log.debug('clicked', simon.toString());
+    log.debug('clicked', simon.toString())
     if (this.isGameRunning) {
       if (this.gameEngine.nextSimon.equals(simon)) {
         if (this.gameEngine.isSequenceComplete()) {

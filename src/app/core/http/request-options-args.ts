@@ -5,9 +5,9 @@
  * If the value 'Update' is used, a request will be forced and the cache entry updated.
  */
 export enum HttpCachePolicy {
-  Never = <any>false,
-  Always = <any>true,
-  Update = <any>'update'
+  Never = false as any,
+  Always = true as any,
+  Update = 'update' as any,
 }
 
 // RequestOptionArgs is declared in a re-exported module, so we have to extend the original module to make it work
@@ -16,8 +16,8 @@ declare module '@angular/http/src/interfaces' {
 
   // Use this interface to extend requests options if needed
   export interface RequestOptionsArgs {
-    cache?: boolean|HttpCachePolicy;
-    skipErrorHandler?: boolean;
+    cache?: boolean|HttpCachePolicy
+    skipErrorHandler?: boolean
   }
 
 }

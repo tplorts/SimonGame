@@ -1,19 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import {
-  Http, ConnectionBackend, RequestOptions, Request, Response, RequestOptionsArgs, RequestMethod, ResponseOptions
-} from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { Subscriber } from 'rxjs/Subscriber';
-import { _throw } from 'rxjs/observable/throw';
-import { catchError } from 'rxjs/operators';
-import { extend } from 'lodash';
+  Http, ConnectionBackend, RequestOptions, Request, Response, RequestOptionsArgs, RequestMethod, ResponseOptions,
+} from '@angular/http'
+import { Observable } from 'rxjs/Observable'
+import { Subscriber } from 'rxjs/Subscriber'
+import { _throw } from 'rxjs/observable/throw'
+import { catchError } from 'rxjs/operators'
+import { extend } from 'lodash'
 
-import { environment } from '../../../environments/environment';
-import { Logger } from '../logger.service';
-import { HttpCacheService } from './http-cache.service';
-import { HttpCachePolicy } from './request-options-args';
+import { environment } from '../../../environments/environment'
+import { Logger } from '../logger.service'
+import { HttpCacheService } from './http-cache.service'
+import { HttpCachePolicy } from './request-options-args'
 
-const log = new Logger('HttpService');
+const log = new Logger('HttpService')
 
 /**
  * Provides a base framework for http service extension.
@@ -22,40 +22,42 @@ const log = new Logger('HttpService');
 @Injectable()
 export class HttpService extends Http {
 
-  constructor(backend: ConnectionBackend,
-              private defaultOptions: RequestOptions,
-              private httpCacheService: HttpCacheService) {
+  constructor (
+    backend: ConnectionBackend,
+    private defaultOptions: RequestOptions,
+    private httpCacheService: HttpCacheService,
+  ) {
     // Customize default options here if needed
-    super(backend, defaultOptions);
+    super(backend, defaultOptions)
   }
 
   /**
    * Performs any type of http request.
    * You can customize this method with your own extended behavior.
    */
-  request(request: string|Request, options?: RequestOptionsArgs): Observable<Response> {
-    const requestOptions = options || {};
-    let url: string;
+  request (request: string|Request, options?: RequestOptionsArgs): Observable<Response> {
+    const requestOptions = options || {}
+    let url: string
 
     if (typeof request === 'string') {
-      url = request;
-      request = environment.serverUrl + url;
+      url = request
+      request = environment.serverUrl + url
     } else {
-      url = request.url;
-      request.url = environment.serverUrl + url;
+      url = request.url
+      request.url = environment.serverUrl + url
     }
 
     if (!requestOptions.cache) {
       // Do not use cache
-      return this.httpRequest(request, requestOptions);
+      return this.httpRequest(request, requestOptions)
     } else {
       return new Observable((subscriber: Subscriber<Response>) => {
         const cachedData = requestOptions.cache === HttpCachePolicy.Update ?
-        null : this.httpCacheService.getCacheData(url);
+        null : this.httpCacheService.getCacheData(url)
         if (cachedData !== null) {
           // Create new response to avoid side-effects
-          subscriber.next(new Response(cachedData));
-          subscriber.complete();
+          subscriber.next(new Response(cachedData))
+          subscriber.complete()
         } else {
           this.httpRequest(request, requestOptions).subscribe(
             (response: Response) => {
@@ -66,72 +68,72 @@ export class HttpService extends Http {
                 headers: response.headers,
                 statusText: response.statusText,
                 type: response.type,
-                url: response.url
-              }));
-              subscriber.next(response);
+                url: response.url,
+              }))
+              subscriber.next(response)
             },
             (error: any) => subscriber.error(error),
-            () => subscriber.complete()
-          );
+            () => subscriber.complete(),
+          )
         }
-      });
+      })
     }
   }
 
-  get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.request(url, extend({}, options, { method: RequestMethod.Get }));
+  get (url: string, options?: RequestOptionsArgs): Observable<Response> {
+    return this.request(url, extend({}, options, { method: RequestMethod.Get }))
   }
 
-  post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+  post (url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
     return this.request(url, extend({}, options, {
-      body: body,
-      method: RequestMethod.Post
-    }));
+      body,
+      method: RequestMethod.Post,
+    }))
   }
 
-  put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+  put (url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
     return this.request(url, extend({}, options, {
-      body: body,
-      method: RequestMethod.Put
-    }));
+      body,
+      method: RequestMethod.Put,
+    }))
   }
 
-  delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.request(url, extend({}, options, { method: RequestMethod.Delete }));
+  delete (url: string, options?: RequestOptionsArgs): Observable<Response> {
+    return this.request(url, extend({}, options, { method: RequestMethod.Delete }))
   }
 
-  patch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+  patch (url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
     return this.request(url, extend({}, options, {
-      body: body,
-      method: RequestMethod.Patch
-    }));
+      body,
+      method: RequestMethod.Patch,
+    }))
   }
 
-  head(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.request(url, extend({}, options, { method: RequestMethod.Head }));
+  head (url: string, options?: RequestOptionsArgs): Observable<Response> {
+    return this.request(url, extend({}, options, { method: RequestMethod.Head }))
   }
 
-  options(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.request(url, extend({}, options, { method: RequestMethod.Options }));
+  options (url: string, options?: RequestOptionsArgs): Observable<Response> {
+    return this.request(url, extend({}, options, { method: RequestMethod.Options }))
   }
 
   // Customize the default behavior for all http requests here if needed
-  private httpRequest(request: string|Request, options: RequestOptionsArgs): Observable<Response> {
-    let req = super.request(request, options);
+  private httpRequest (request: string|Request, options: RequestOptionsArgs): Observable<Response> {
+    let req = super.request(request, options)
     if (!options.skipErrorHandler) {
-      req = req.pipe(catchError((error: any) => this.errorHandler(error)));
+      req = req.pipe(catchError((error: any) => this.errorHandler(error)))
     }
-    return req;
+    return req
   }
 
   // Customize the default error handler here if needed
-  private errorHandler(response: Response): Observable<Response> {
+  private errorHandler (response: Response): Observable<Response> {
     if (environment.production) {
       // Avoid unchaught exceptions on production
-      log.error('Request error', response);
-      return _throw(response);
+      log.error('Request error', response)
+      return _throw(response)
     }
-    throw response;
+    throw response
   }
 
 }

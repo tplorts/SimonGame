@@ -157,7 +157,9 @@
     ],
     "no-consecutive-blank-lines": [true, 3],
     "arrow-parens": [true, "ban-single-arg-parens"],
-    "ordered-imports": false
+    "only-arrow-functions": false,
+    "ordered-imports": false,
+    "interface-name": false
 
   }
 }

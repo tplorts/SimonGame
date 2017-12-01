@@ -1,17 +1,17 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Http, BaseRequestOptions } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { Http, BaseRequestOptions } from '@angular/http'
+import { MockBackend } from '@angular/http/testing'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { FlexLayoutModule } from '@angular/flex-layout'
 
-import { MaterialModule } from '../material.module';
-import { SharedModule } from '../shared/shared.module';
-import { GameModule } from '../game/game.module';
-import { HomeComponent } from './home.component';
+import { MaterialModule } from '../material.module'
+import { SharedModule } from '../shared/shared.module'
+import { GameModule } from '../game/game.module'
+import { HomeComponent } from './home.component'
 
 describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+  let component: HomeComponent
+  let fixture: ComponentFixture<HomeComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -29,22 +29,22 @@ describe('HomeComponent', () => {
           {
             provide: Http,
             useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
-              return new Http(backend, defaultOptions);
+              return new Http(backend, defaultOptions)
             },
-            deps: [MockBackend, BaseRequestOptions]
-          }
-        ]
+            deps: [MockBackend, BaseRequestOptions],
+          },
+        ],
       })
-      .compileComponents();
-  }));
+      .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(HomeComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

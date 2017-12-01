@@ -1,22 +1,22 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing'
 
-import { GameModule } from './game.module';
-import { GameConfigService } from './game-config.service';
+import { GameModule } from './game.module'
+import { GameConfigService } from './game-config.service'
 
 describe('GameConfigService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        GameModule
+        GameModule,
       ],
-    });
-  });
+    })
+  })
 
   it('should be created', inject([GameConfigService], (service: GameConfigService) => {
-    expect(service).toBeTruthy();
-  }));
+    expect(service).toBeTruthy()
+  }))
 
   it('should define four colors', inject([GameConfigService], (gameConfig: GameConfigService) => {
-    expect(gameConfig.colors.length).toBe(4);
-  }));
-});
+    expect(gameConfig.colors.length).toBe(4)
+  }))
+})

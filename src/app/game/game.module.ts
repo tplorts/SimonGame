@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
 
-import { MaterialModule } from '../material.module';
+import { MaterialModule } from '../material.module'
 
-import { GameComponent } from './game.component';
-import { GameConfigService } from './game-config.service';
-import { GameEngineService } from './game-engine.service';
+import { GameComponent } from './game.component'
+import { GameConfigService } from './game-config.service'
+import { GameEngineService } from './game-engine.service'
 
 @NgModule({
   imports: [
@@ -21,6 +21,6 @@ import { GameEngineService } from './game-engine.service';
   providers: [
     GameConfigService,
     GameEngineService,
-  ]
+  ],
 })
 export class GameModule { }

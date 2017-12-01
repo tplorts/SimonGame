@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateModule } from '@ngx-translate/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { RouterTestingModule } from '@angular/router/testing'
+import { TranslateModule } from '@ngx-translate/core'
 
-import { ShellComponent } from './shell.component';
-import { CoreModule } from '../core.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ShellComponent } from './shell.component'
+import { CoreModule } from '../core.module'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 describe('ShellComponent', () => {
-  let component: ShellComponent;
-  let fixture: ComponentFixture<ShellComponent>;
+  let component: ShellComponent
+  let fixture: ComponentFixture<ShellComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -16,19 +16,19 @@ describe('ShellComponent', () => {
         RouterTestingModule,
         TranslateModule.forRoot(),
         BrowserAnimationsModule,
-        CoreModule
-      ]
+        CoreModule,
+      ],
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShellComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(ShellComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

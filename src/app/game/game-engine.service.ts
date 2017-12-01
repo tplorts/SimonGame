@@ -1,19 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 
-import { GameConfigService } from './game-config.service';
+import { GameConfigService } from './game-config.service'
 import Simon from './simon'
 
 
 @Injectable()
 export class GameEngineService {
-  private _sequence: Simon[];
+  private _sequence: Simon[]
   private _nextIndex: number
 
   constructor (private gameConfig: GameConfigService) {
     this.resetGame()
   }
 
-  public get sequence() : Simon[] {
+  public get sequence (): Simon[] {
     return this._sequence
   }
 
@@ -22,30 +22,30 @@ export class GameEngineService {
     this._nextIndex = null
   }
 
-  public get nextSimon() : Simon {
+  public get nextSimon (): Simon {
     return this._sequence[this._nextIndex++]
   }
 
-  isSequenceComplete () : boolean {
+  isSequenceComplete (): boolean {
     return this._nextIndex === this._sequence.length
   }
 
-  addToSequence () : Simon {
+  addToSequence (): Simon {
     const nextSimon = this.randomSimon()
     this._sequence.push(nextSimon)
     return nextSimon
   }
 
-  startNextRun() {
+  startNextRun () {
     this.addToSequence()
     this._nextIndex = 0
   }
 
-  randomSimon () : Simon {
+  randomSimon (): Simon {
     return this.gameConfig.simons[this.randomSimonIndex()]
   }
 
-  randomSimonIndex () : number {
+  randomSimonIndex (): number {
     return Math.floor(Math.random() * this.gameConfig.numberOfSimons)
   }
 
@@ -55,7 +55,7 @@ export class GameEngineService {
       && this.sequence.every((simon, i) => simon.equals(otherSequence[i]))
   }
 
-  cloneSequence () : Simon[] {
+  cloneSequence (): Simon[] {
     return this.sequence.map(simon => simon.clone())
   }
 }

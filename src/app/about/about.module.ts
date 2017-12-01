@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { TranslateModule } from '@ngx-translate/core'
+import { FlexLayoutModule } from '@angular/flex-layout'
 
-import { MaterialModule } from '../material.module';
-import { AboutRoutingModule } from './about-routing.module';
-import { AboutComponent } from './about.component';
+import { MaterialModule } from '../material.module'
+import { AboutRoutingModule } from './about-routing.module'
+import { AboutComponent } from './about.component'
 
 @NgModule({
   imports: [
@@ -13,10 +13,10 @@ import { AboutComponent } from './about.component';
     TranslateModule,
     FlexLayoutModule,
     MaterialModule,
-    AboutRoutingModule
+    AboutRoutingModule,
   ],
   declarations: [
-    AboutComponent
-  ]
+    AboutComponent,
+  ],
 })
 export class AboutModule { }

@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
 
-  isLoading: boolean;
+  isLoading: boolean
 
-  ngOnInit() {
-    this.isLoading = false;
+  ngOnInit () {
+    this.isLoading = false
   }
 
 }
