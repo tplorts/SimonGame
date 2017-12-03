@@ -15,27 +15,27 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-        imports: [
-          BrowserAnimationsModule,
-          FlexLayoutModule,
-          MaterialModule,
-          SharedModule,
-          GameModule,
-        ],
-        declarations: [HomeComponent],
-        providers: [
-          MockBackend,
-          BaseRequestOptions,
-          {
-            provide: Http,
-            useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
-              return new Http(backend, defaultOptions)
-            },
-            deps: [MockBackend, BaseRequestOptions],
+      imports: [
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        MaterialModule,
+        SharedModule,
+        GameModule,
+      ],
+      declarations: [HomeComponent],
+      providers: [
+        MockBackend,
+        BaseRequestOptions,
+        {
+          provide: Http,
+          useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
+            return new Http(backend, defaultOptions)
           },
-        ],
-      })
-      .compileComponents()
+          deps: [MockBackend, BaseRequestOptions],
+        },
+      ],
+    })
+    .compileComponents()
   }))
 
   beforeEach(() => {
