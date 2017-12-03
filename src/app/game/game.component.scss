@@ -1,5 +1,14 @@
 .game-container {
-  background-color: black;
+  transition: background-color 0.5s;
+  background-color: #999;
+
+  &.game-running {
+    background-color: #555;
+  }
+
+  &.playing-sequence {
+    background-color: #333;
+  }
 }
 
 .game-buttons {

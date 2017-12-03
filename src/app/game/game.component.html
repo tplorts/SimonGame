@@ -1,4 +1,6 @@
-<mat-card class="game-container">
+<mat-card class="game-container"
+  [ngClass]="{ 'game-running': isGameRunning, 'playing-sequence': isPlayingSequence }"
+>
 
   <div>
     <button mat-raised-button
@@ -10,6 +12,7 @@
   <div class="game-buttons">
     <button mat-fab simon-button
       *ngFor="let simon of simons"
+      [disabled]="isPlayingSequence"
       [ngClass]="{ 'flashing': simon.equals(flashingSimon) }"
       [ngStyle]="simon.style()"
       (click)="clickedSimon(simon)"></button>

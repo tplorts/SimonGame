@@ -18,6 +18,7 @@ const log = new Logger('Game')
 export class GameComponent implements OnInit {
   flashingSimon: Simon
   isGameRunning: boolean
+  isPlayingSequence: boolean
   timeBetweenRuns: number
   flashTime: number
   timeBetweenFlashes: number
@@ -29,6 +30,7 @@ export class GameComponent implements OnInit {
   ) {
     this.flashingSimon = null
     this.isGameRunning = false
+    this.isPlayingSequence = false
     this.timeBetweenRuns = 500
     this.flashTime = 400
     this.timeBetweenFlashes = 300
@@ -54,15 +56,17 @@ export class GameComponent implements OnInit {
 
   async startNextRun () {
     this.gameEngine.startNextRun()
-    await this.timerPromise(this.timeBetweenRuns)
     await this.playSequence()
   }
 
   async playSequence () {
+    this.isPlayingSequence = true
+    await this.timerPromise(this.timeBetweenRuns)
     for (const simon of this.gameEngine.sequence) {
       this.playTone(simon)
       await this.flashSimon(simon)
     }
+    this.isPlayingSequence = false
   }
 
   async playTone (simon: Simon) {
